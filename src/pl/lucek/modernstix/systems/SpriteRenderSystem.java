@@ -54,18 +54,15 @@ public class SpriteRenderSystem extends EntitySystem {
         for (AtlasRegion r : textureAtlas.getRegions()) {
             regions.put(r.name, r);
         }
+
         regionsByEntity = new Bag<AtlasRegion>();
-
         batch = new SpriteBatch();
-
         sortedEntities = new ArrayList<Entity>();
 
-        Texture fontTexture = new Texture(Gdx.files.internal("fonts/normal_0.png"));
-        fontTexture.setFilter(TextureFilter.Linear, TextureFilter.MipMapLinearLinear);
-        TextureRegion fontRegion = new TextureRegion(fontTexture);
-        font = new BitmapFont(Gdx.files.internal("fonts/normal.fnt"), fontRegion, false);
-        font.setUseIntegerPositions(false);
+        initFont();
     }
+
+
 
 	@Override
 	protected void begin() {
@@ -127,5 +124,13 @@ public class SpriteRenderSystem extends EntitySystem {
 		regionsByEntity.set(e.getId(), null);
 		sortedEntities.remove(e);
 	}
+
+    private void initFont() {
+        Texture fontTexture = new Texture(Gdx.files.internal("fonts/normal_0.png"));
+        fontTexture.setFilter(TextureFilter.Linear, TextureFilter.MipMapLinearLinear);
+        TextureRegion fontRegion = new TextureRegion(fontTexture);
+        font = new BitmapFont(Gdx.files.internal("fonts/normal.fnt"), fontRegion, false);
+        font.setUseIntegerPositions(false);
+    }
 
 }
