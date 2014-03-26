@@ -1,5 +1,7 @@
 package pl.lucek.modernstix;
 
+import pl.lucek.modernstix.utils.ImagePacker;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -10,10 +12,12 @@ public class ModernStix extends Game {
 
 	@Override
 	public void create() {
-		setScreen(new GameScreen(this));
-	}
-	
+		setScreen(new GameScreen());
+    }
+
 	public static void main(String[] args) {
+	    ImagePacker.run();
+
 		LwjglApplicationConfiguration lwjglApplicationConfiguration = new LwjglApplicationConfiguration();
 		lwjglApplicationConfiguration.fullscreen = false;
 		lwjglApplicationConfiguration.width = FRAME_WIDTH;

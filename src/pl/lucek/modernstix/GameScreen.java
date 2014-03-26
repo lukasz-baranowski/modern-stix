@@ -1,7 +1,8 @@
 package pl.lucek.modernstix;
 
+import pl.lucek.modernstix.systems.SpriteRenderSystem;
+
 import com.artemis.World;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -9,15 +10,18 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class GameScreen implements Screen {
-	private Game game;
 	private World world;
 	private OrthographicCamera camera;
 
-	public GameScreen(Game game) {
-		this.game = game;
+    private SpriteRenderSystem spriteRenderSystem;
+
+	public GameScreen() {
 		this.camera = new OrthographicCamera(ModernStix.FRAME_WIDTH, ModernStix.FRAME_HEIGHT);
 
 		world = new World();
+
+        spriteRenderSystem = world.setSystem(new SpriteRenderSystem(camera), true);
+
 		world.initialize();
 	}
 
@@ -34,8 +38,8 @@ public class GameScreen implements Screen {
 			}
 		}
 		world.process();
-		
-//		spriteRenderSystem.process();
+
+		spriteRenderSystem.process();
 //		healthRenderSystem.process();
 //		hudRenderSystem.process();
 	}
