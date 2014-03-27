@@ -11,8 +11,8 @@ public class ImagePacker {
 		settings.padding = 2;
 		settings.incremental = true;
 		settings.stripWhitespace = false;
-		settings.minHeight = 1024;
 		settings.minWidth = 1024;
+		settings.minHeight = 1024;
 		settings.defaultFilterMin = Texture.TextureFilter.Linear;
 		settings.defaultFilterMag = Texture.TextureFilter.Linear;
         TexturePacker.process(settings, "textures-original", "resources/textures");

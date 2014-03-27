@@ -1,5 +1,8 @@
 package pl.lucek.modernstix;
 
+import pl.lucek.modernstix.systems.ColorAnimationSystem;
+import pl.lucek.modernstix.systems.MovementSystem;
+import pl.lucek.modernstix.systems.ParallaxStarRepeatingSystem;
 import pl.lucek.modernstix.systems.SpriteRenderSystem;
 
 import com.artemis.World;
@@ -20,9 +23,17 @@ public class GameScreen implements Screen {
 
 		world = new World();
 
-        spriteRenderSystem = world.setSystem(new SpriteRenderSystem(camera), true);
+		world.setSystem(new ColorAnimationSystem());
+		world.setSystem(new MovementSystem());
+		world.setSystem(new ParallaxStarRepeatingSystem());
+
+		spriteRenderSystem = world.setSystem(new SpriteRenderSystem(camera), true);
 
 		world.initialize();
+
+		for(int i = 0; 500 > i; i++) {
+			EntityFactory.createStar(world).addToWorld();
+		}
 	}
 
 	@Override
@@ -32,16 +43,14 @@ public class GameScreen implements Screen {
 		camera.update();
 
 		world.setDelta(arg0);
-		if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-			for(int i = 0; 10 > i; i++) {
+		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+			for (int i = 0; 10 > i; i++) {
 				world.process();
 			}
 		}
 		world.process();
 
 		spriteRenderSystem.process();
-//		healthRenderSystem.process();
-//		hudRenderSystem.process();
 	}
 
 	@Override
